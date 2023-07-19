@@ -1,0 +1,36 @@
+﻿@model ContatoModel
+@{
+	ViewData["Title"] = "Editar contato";
+}
+<div class="text-center">
+	<h4 class="display-4"> Editar contato </h4>
+</div>
+
+<form asp-controller="Contatos" asp-action="Alterar" method="post">
+
+    <input type="hidden" asp-for="Id"/>
+    <div class="form-group">
+        <label asp-for="Nome">Nome</label>
+        <input asp-for="Nome" type="text" class="form-control">
+        <!-- O Html.ValidationMessageFor é para mostrar a mensagem
+        de erro que foi posta na ContatoModel-->
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div> <br>
+
+    <div class="form-group">
+        <label asp-for="Email">E-mail</label>
+        <input asp-for="Email" type="email"  class="form-control">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div> <br>
+
+    <div class="form-group">
+        <label asp-for="Celular" >Celular</label>
+        <input asp-for="Celular" type="text"  class="form-control">
+        @Html.ValidationMessageFor(x => x.Celular)
+    </div> <br>
+
+    <div class="d-flex flex-column">
+        <button type="submit" class="btn btn-primary flex-fill">Alterar</button>
+        <a class="btn btn-secondary mt-2 flex-fill" asp-controller="Contatos" asp-action="Index" role="button">Voltar</a>
+    </div>
+</form>

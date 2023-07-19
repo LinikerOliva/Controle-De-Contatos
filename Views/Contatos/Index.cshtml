@@ -1,0 +1,62 @@
+﻿@model List<ContatoModel>
+@{
+	ViewData["Title"] = "Listagem de contatos";
+}
+
+<div class="text-center">
+	<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+		<a class="btn btn-primary" role="button" asp-controller="Contatos" asp-action="Criar"> Adicionar novo contato </a>
+	</div>
+</div>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+	<div class="alert alert-success text-center" role="alert">
+		<button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+		@TempData["MensagemSucesso"]
+	</div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+	<div class="alert alert-danger text-center" role="alert">
+		<button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+		@TempData["MensagemErro"]
+	</div>
+}
+
+<h1 class="display-4"> Listagem de Contatos </h1>
+
+<table class="table" id="table-contatos">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Nome</th>
+			<th>Email</th>
+			<th>Celular</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null && Model.Any())
+		{
+			@foreach (var contato in Model)
+			{
+				<tr>
+					<td>@contato.Id</td>
+					<td>@contato.Nome</td>
+					<td>@contato.Email</td>
+					<td>@contato.Celular</td>
+					<td>
+						<a asp-controller="Contatos" asp-action="Editar" asp-route-id=" @contato.Id" class="btn btn-primary" role="button">Editar</a>
+						<a asp-controller="Contatos" asp-action="ApagarConfirmacao" asp-route-id="@contato.Id" class="btn btn-danger" role="button">Excluir</a>
+					</td>
+				</tr>
+			}
+		}
+		else
+		{
+			<tr class="odd"><td valign="top" colspan="5">Nenhum contato encontrado</td></tr>
+		}
+	</tbody>
+</table>
